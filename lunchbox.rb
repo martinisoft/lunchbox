@@ -1,6 +1,9 @@
+#!/usr/bin/env ruby
+
 require 'rubygems'
 require 'sequel'
 require 'base64'
+require 'readline'
 
 class Lunchbox
   def initialize(db = "lunchbox.db")
@@ -52,6 +55,14 @@ class Lunchbox
   def delete(filename)
     @files.filter(:name => filename).delete
     puts "Deleted file: #{filename}"
+  end
+  
+  def run
+    loop do
+      line = Readline::readline('lunchbox$ ')
+      Readline::HISTORY.push(line)
+      puts "#{line}"
+    end
   end
   
 end
